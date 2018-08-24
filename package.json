@@ -1,0 +1,23 @@
+{
+  "name": "fync.app",
+  "version": "1.0.0",
+  "description": "app.fync",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wagnerww/FYNC-API.git"
+  },
+  "author": "fync company",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wagnerww/FYNC-API/issues"
+  },
+  "homepage": "https://github.com/wagnerww/FYNC-API#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  }
+}
