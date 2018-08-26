@@ -1,17 +1,19 @@
-var mysql   = require('mysql');
+//var mysql   = require('mysql');
+const Sequelize = require('sequelize');
+
 
 //cria conecção
-var connection;
-var obj = { 
-        host     :'localhost',
-        port     :3306,
-        user     :'root',        
-        password :'1234',
-        database :'fyncdb',
-        insecureAuth : true
-    };
-//CASO DE ERRO DE INCOMPATIBILIDADE, RODAR NO BANCO:ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'senha';
+const sequelize = new Sequelize('fyncdb', 'root', '1234', {
+    host:"localhost",
+    port:3306,
+    dialect:'mysql',
+    define:{
+        timestamps: false
+    }
+}) 
 
+//CASO DE ERRO DE INCOMPATIBILIDADE, RODAR NO BANCO:ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'senha';
+/*
 var connection  =   mysql.createConnection(obj);
       
 connection.connect(function(err){
@@ -68,5 +70,5 @@ var query = {
         });
     }
 }
-
-module.exports = query;
+*/
+module.exports = sequelize;

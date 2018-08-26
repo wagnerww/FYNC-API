@@ -1,14 +1,16 @@
 //const express = require('express');
+const bodyParser       = require('body-parser');
 const restify           = require('restify');
 const usuariosServices  = require('../services/usuario/usuarios-service');
-const db               = require('../config/db');
+const usuarioModel   = require('../module/usuariosModel');
 //const router = server;
 
 const port = 3000;
 const server = restify.createServer();
 
-server.post('/listarUsuarios/:skip/:limit', function(request, response){
-    usuariosServices.getData.selecTodosUsuariosLimit(request.params.skip, request.params.limit).then(function(res){        
+
+server.post('/listarUsuarios', function(request, response){
+    usuariosServices.getData.selecTodosUsuariosLimit(request.body.skip, request.body.limit).then(function(res){        
         trataRetornos(true, '', res).then(retornoAPI => {            
             response.send(retornoAPI);
         });
@@ -20,8 +22,8 @@ server.post('/listarUsuarios/:skip/:limit', function(request, response){
     });
 });
 
-server.post('/listarUsuario/:id', function(request, response){
-    usuariosServices.getData.selectUsuario(request.params.id).then(function(res){        
+server.post('/listarUsuario', function(request, response){
+    usuariosServices.getData.selectUsuario(request.body.id).then(function(res){        
         trataRetornos(true, '', res).then(retornoAPI => {            
             response.send(retornoAPI);
         });
@@ -57,6 +59,12 @@ function trataRetornos(isSucces, erro, data){
         resolve(retorno);
     });
 }
+
+server.use(restify.plugins.bodyParser({
+    mapParams:true,
+    mapFiles:false,
+    overrideParams: false
+}));
 
 server.listen(3000, () => {
     console.log("Servidor em pé!");

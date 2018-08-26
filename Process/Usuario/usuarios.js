@@ -1,42 +1,35 @@
-const conn = require('../../config/db');
-const bodyParser = require('body-parser');
+const usuariosModel = require('../../module/usuariosModel');
 
-function countTodosUsuarios(){
-    return new Promise(function(resolve, reject){
-        const sql ='select count(*)  as count from usuarios';
-         conn.select(sql).then(function(data) {            
-            resolve(data);
-        }).catch(err => {              
-            reject(err);
-        });   
-    }); 
-}
 
-function selectUsuarios(id){
-    return new Promise(function(resolve, reject){       
-        let values = [id];
-         const sql ='select * from usuarios where usucodigo = ?';
-         conn.select(sql, values).then(function(data) {            
-            resolve(data);
-        }).catch(err => {              
-            reject(err);
+let proccesUsuarios = { 
+    countTodosUsuarios : function(){
+        return new Promise(function(resolve, reject){
+            usuariosModel.usuariosModel.count().then(function(data) {               
+                resolve(data);
+            }).catch(err => {              
+                reject(err);
+            });
+        }); 
+    },
+    selectUsuario : function(id){
+        return new Promise(function(resolve, reject){
+            usuariosModel.usuariosModel.findById(id).then(function(data) {               
+                resolve(data);
+            }).catch(err => {
+                reject(err);
+            });
         });   
-    });   
-}
-
-function selecTodosUsuariosLimit(skip, limit){
-    return new Promise(function(resolve, reject){        
-        let res = {};
-        const sql ='select * from usuarios limit '+skip+','+limit;
-         conn.select(sql).then(function(data) {            
-            resolve(data);
-        }).catch(err => {              
-            reject(err);
-        });   
-    });
+    },
+    selecTodosUsuariosLimit : function(skip, limit){
+        return new Promise(function(resolve, reject){  
+            usuariosModel.usuariosModel.findAll({offset:skip,limit:limit}).then(function(data) {
+                resolve(data);
+            }).catch(err => {              
+                reject(err);
+            });
+        });
+    }
 }
 
 
-module.exports ={ selecTodosUsuariosLimit:selecTodosUsuariosLimit, countTodosUsuarios:countTodosUsuarios,
- selectUsuarios:selectUsuarios
- }
+module.exports ={ proccesUsuarios:proccesUsuarios }
