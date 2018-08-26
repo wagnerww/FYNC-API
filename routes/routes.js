@@ -2,6 +2,7 @@
 const bodyParser       = require('body-parser');
 const restify           = require('restify');
 const usuariosServices  = require('../services/usuario/usuarios-service');
+const usuariosInput  = require('../services/usuario/input-usuarios-services');
 const usuarioModel   = require('../module/usuariosModel');
 //const router = server;
 
@@ -29,6 +30,32 @@ server.post('/listarUsuario', function(request, response){
         });
     }).catch(err => {
         console.log('erro ao retornar os usários', err);
+        trataRetornos(false, err, []).then(retornoAPI => {            
+            response.send(retornoAPI);
+        });
+    });
+});
+
+server.post('/insertUsuario', function(request, response){
+    usuariosInput.inputData.insertUsuario(request.body).then(function(res){        
+        trataRetornos(true, '', res).then(retornoAPI => {            
+            response.send(retornoAPI);
+        });
+    }).catch(err => {
+        console.log('erro ao inserir os usários', err);
+        trataRetornos(false, err, []).then(retornoAPI => {            
+            response.send(retornoAPI);
+        });
+    });
+});
+
+server.post('/updateUsuario', function(request, response){
+    usuariosInput.inputData.updateUsuario(request.body).then(function(res){        
+        trataRetornos(true, '', res).then(retornoAPI => {            
+            response.send(retornoAPI);
+        });
+    }).catch(err => {
+        console.log('erro ao inserir os usários', err);
         trataRetornos(false, err, []).then(retornoAPI => {            
             response.send(retornoAPI);
         });
