@@ -31,8 +31,7 @@ let getData = {
                 reject(err);
             });
         });
-    }
-    
+    }    
 }
 
 function processaRetorno(dataDB){
