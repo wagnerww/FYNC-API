@@ -33,8 +33,10 @@ let proccesUsuarios = {
     insertUsuario : function(data){
         return new Promise(function(resolve, reject){
             usuariosModel.usuariosModel.max('UsuCodigo').then(function(max){  
-                data.usuariosModel.UsuCodigo = max + 1;             
-                usuariosModel.usuariosModel.create(data.usuariosModel).then(function(res) {
+                data.UsuCodigo      = max + 1;
+                data.UsuStatus      = 1;
+                data.UsuDtaRegistro = '2018-08-08 22:00:00';
+                usuariosModel.usuariosModel.create(data).then(function(res) {
                     resolve(res);
                 }).catch(err => {              
                     reject(err);
@@ -45,19 +47,19 @@ let proccesUsuarios = {
     },
     updateUsuario : function(data){
         return new Promise(function(resolve, reject){
-            usuariosModel.usuariosModel.update(data.usuariosModel, {
-                where:{UsuCodigo : data.usuariosModel.UsuCodigo}}
+            usuariosModel.usuariosModel.update(data, {
+                where:{UsuCodigo : data.UsuCodigo}}
                 ).then(function(res) {
                     resolve(res);
-                }).catch(err => {              
+                }).catch(err => {
                     reject(err);
                 });
         });  
     },
-    deleteUsuario : function(id){
+    deleteUsuario : function(UsuCodigo){
         return new Promise(function(resolve, reject){
             usuariosModel.usuariosModel.destroy({
-                where:{UsuCodigo : id}}
+                UsuCodigo:UsuCodigo}
                 ).then(function(res) {
                     resolve(res);
                 }).catch(err => {              

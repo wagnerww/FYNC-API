@@ -18,9 +18,9 @@ let getData = {
             });
         });
     },
-    selectUsuario: function(id){
+    selectUsuario: function(UsuCodigo){
         return new Promise(function(resolve, reject){
-            usuarios.proccesUsuarios.selectUsuario(id).then(function(dataDB){
+            usuarios.proccesUsuarios.selectUsuario(UsuCodigo).then(function(dataDB){
                 processaRetorno(dataDB).then(function(dataArray){               
                     retornoLista.estruturaRetorno(dataArray, 1).then(function(retorno) {
                         resolve(retorno);
@@ -37,18 +37,7 @@ let getData = {
 
 function processaRetorno(dataDB){
     return new Promise(function(resolve, reject){
-        let dataArray = [];
-        for(let i =0; i < dataDB.length; i++){
-            dataArray.push({
-                id          : dataDB[i].UsuCodigo,
-                Documento   : dataDB[i].UsuCPFCNPJ,
-                Email       : dataDB[i].UsuEmail,
-                Senha       : dataDB[i].UsuSenha,
-                Status      : dataDB[i].UsuStatus,
-                Nome        : dataDB[i].UsuNome,
-                DtaRegistro : dataDB[i].UsuDtaRegistro
-            });
-        }
+        let dataArray = dataDB;
         resolve(dataArray);
     });
 }
