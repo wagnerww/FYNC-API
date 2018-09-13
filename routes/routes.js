@@ -2,15 +2,21 @@ const bodyParser       = require('body-parser');
 const restify           = require('restify');
 const usuariosServices  = require('../services/usuario/listas-usuarios-service');
 const usuariosInput  = require('../services/usuario/input-usuarios-services');
+const cors              = require('../config/cors.config');
+//const cors = require('../config/cors')
 
-const port = 3000;
+const port = 8080;
 const server = restify.createServer();
 
+   
+  server.pre(cors.preflight)
+  server.use(cors.actual)
 
-server.post('/listarUsuarios', function(request, response){
+server.post('/listarUsuarios',  function(request, response){
+    console.log('limit', request.body.limit);
     usuariosServices.getData.selecTodosUsuariosLimit(request.body.skip, request.body.limit).then(function(res){        
-        trataRetornos(true, '', res).then(retornoAPI => {            
-            response.send(retornoAPI);
+        trataRetornos(true, '', res).then(retornoAPI => {     
+        response.send(200, retornoAPI);
         });
     }).catch(err => {
         console.log('erro ao retornar os usários', err);
@@ -79,19 +85,19 @@ server.get('/init', function(request, response){
 
 function trataRetornos(isSucces, erro, data){
     return new Promise(function(resolve, reject){        
-        let retorno = [];
+        let retorno = {};
         if(isSucces){
-            retorno.push({
+            retorno ={
                 status:100,
                 mensagem : 'Sucesso',
                 retornos:data
-            });
+            };
         } else {
-            retorno.push({
+            retorno = {
                 status:101,
                 mensagem : 'Falha: '+erro,
                 retornos:[]
-            });
+            };
         }
         resolve(retorno);
     });
@@ -103,9 +109,8 @@ server.use(restify.plugins.bodyParser({
     overrideParams: false
 }));
 
-server.listen(3000, () => {
+server.listen(port, () => {
     console.log("Servidor em pé!");
 });
-
 
 module.exports = server;

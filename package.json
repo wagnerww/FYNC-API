@@ -18,10 +18,12 @@
   "homepage": "https://github.com/wagnerww/FYNC-API#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.1",
     "restify": "^7.2.1",
+    "restify-cors-middleware": "^1.1.1",
     "sequelize": "^4.38.0"
   }
 }
