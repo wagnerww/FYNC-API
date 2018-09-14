@@ -1,4 +1,4 @@
-const usuarios = require('../../Process/usuario/usuarios');
+const usuarios = require('../../Proccess/usuario/usuarios');
 const retornoLista = require('../retornos/estrutura-retorno-listas');
 
 let getData = {

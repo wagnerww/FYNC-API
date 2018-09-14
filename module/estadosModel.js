@@ -1,4 +1,3 @@
-/*
 const Sequelize = require('sequelize');
 const db = require('../config/db');
 
@@ -7,8 +6,14 @@ var estadosModel = db.define('estados',{
         type: Sequelize.STRING,
         primaryKey: true
     },
-    PaiSigla:Sequelize.STRING,
-    PaiDescricao:Sequelize.STRING
+    EstDescricao:Sequelize.STRING,
+    PaiCodigo: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'paisesModel',
+            key: 'PaiCodigo'
+        }
+    }
 });
 
 
@@ -16,4 +21,3 @@ var estadosModel = db.define('estados',{
 module.exports = {
     estadosModel:estadosModel   
 }
-*/

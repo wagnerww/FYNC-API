@@ -1,5 +1,5 @@
 const Model = require('../../module/usuariosModel');
-const usuarios = require('../../Process/usuario/usuarios');
+const usuarios = require('../../Proccess/usuario/usuarios');
 
 let inputData = {    
     insertUsuario : function(data){
