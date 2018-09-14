@@ -13,7 +13,7 @@ const sequelize = new Sequelize('fync_devel', 'root', 'mysql', {
 }) 
 
 //CASO DE ERRO DE INCOMPATIBILIDADE, RODAR NO BANCO:ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'senha';
-/*
+/* blaaaaaaaa
 var connection  =   mysql.createConnection(obj);
       
 connection.connect(function(err){
