@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 
 //cria conecção
-const sequelize = new Sequelize('fyncdb', 'root', '1234', {
+const sequelize = new Sequelize('fync_devel', 'root', 'mysql', {
     host:"localhost",
     port:3306,
     dialect:'mysql',
