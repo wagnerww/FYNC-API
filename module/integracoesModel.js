@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
 
-var logUsuariosModel = db.define('logusuarios',{
-    LogUsrCodigo:{
+var integracoesModel = db.define('integracoes',{
+    IntCodigo:{
         type: Sequelize.INTEGER,
         primaryKey: true
     },    
@@ -14,13 +14,12 @@ var logUsuariosModel = db.define('logusuarios',{
         },
         primaryKey: true
     },
-    LogUsrDtaRegistro:Sequelize.DATE,
-    LogUsrDescricao:Sequelize.STRING,
-    LogUsrObservacao:Sequelize.STRING,
-    LogUsrTabela:Sequelize.STRING,
-    LogUsrTipAcao:Sequelize.INTEGER
+    IntSistema:Sequelize.STRING,
+    IntParametros:Sequelize.STRING,
+    IntStatus:Sequelize.INTEGER,
+    IntDtaCadastro:Sequelize.DATE
 });
 
 module.exports = {
-    logUsuariosModel:logUsuariosModel   
+    integracoesModel:integracoesModel   
 }
